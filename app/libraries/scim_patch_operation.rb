@@ -47,7 +47,17 @@ class ScimPatchOperation
       filter_string = path_str.slice!(/\[(.+?)\]/, 0)&.slice(/\[(.+?)\]/, 1)
 
       # path_elements: ['emails', 'value']
-      path_elements = path_str.split('.')
+      attributes = Scimaenaga.config.mutable_user_attributes_schema.keys.map(&:to_s)
+      first_element = attributes.find { |attr| path_str.start_with?(attr) }
+      path_elements =
+        if path_str == first_element
+          [first_element]
+        elsif first_element
+          elements_after_first = path_str.slice((first_element.length + 1)..-1).split('.')
+          [first_element] + elements_after_first
+        else
+          path_str.split('.') # This should not pass if the config is correctly defined.
+        end
 
       # filter_elements: ['type', 'eq', '"work"']
       filter_elements = filter_string&.split(' ')
