@@ -6,6 +6,7 @@ module Scimaenaga
     include ExceptionHandler
     include Response
 
+    around_action :set_locale
     before_action :authorize_request
 
     private
@@ -67,6 +68,13 @@ module Scimaenaga
           end
           nil
         end
+      end
+
+      def set_locale
+        I18n.locale = :en
+        yield
+      ensure
+        I18n.locale = I18n.default_locale
       end
   end
 end
