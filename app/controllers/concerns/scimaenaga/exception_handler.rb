@@ -47,6 +47,7 @@ module Scimaenaga
           json_response(
             {
               schemas: ['urn:ietf:params:scim:api:messages:2.0:Error'],
+              detail: "#{exception.message}",
               status: '500',
             },
             :internal_server_error
