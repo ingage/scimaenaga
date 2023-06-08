@@ -35,7 +35,7 @@ module Scimaenaga
     end
 
     included do
-      if Rails.env.production?
+      if Rails.env.production? || Rails.env.staging?
         rescue_from StandardError do |exception|
           on_error = Scimaenaga.config.on_error
           if on_error.respond_to?(:call)
