@@ -20,7 +20,7 @@ module Scimaenaga
       else
         groups = @company
                  .public_send(Scimaenaga.config.scim_groups_scope)
-                 .preload(:users)
+                 .preload(:scim_users)
                  .order(Scimaenaga.config.scim_groups_list_order)
       end
 
