@@ -35,7 +35,7 @@ module Scimaenaga
     end
 
     included do
-      if Rails.env.production?
+      if Rails.env.production? || Rails.env.staging?
         rescue_from StandardError do |exception|
           on_error = Scimaenaga.config.on_error
           if on_error.respond_to?(:call)
@@ -47,6 +47,7 @@ module Scimaenaga
           json_response(
             {
               schemas: ['urn:ietf:params:scim:api:messages:2.0:Error'],
+              detail: "#{exception.message}",
               status: '500',
             },
             :internal_server_error
