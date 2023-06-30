@@ -7,6 +7,7 @@ module Scimaenaga
     include Response
 
     around_action :set_locale
+    before_action :log_request_details
     before_action :authorize_request
 
     private
@@ -75,6 +76,17 @@ module Scimaenaga
         yield
       ensure
         I18n.locale = I18n.default_locale
+      end
+
+      def log_request_details
+        if request.method != 'GET'
+          details = {
+            method: request.method,
+            fullpath: request.fullpath,
+            params: request.filtered_parameters,
+          }
+          Rails.logger.info details.to_json
+        end
       end
   end
 end
