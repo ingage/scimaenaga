@@ -19,6 +19,7 @@ class ScimPatchOperationGroup < ScimPatchOperation
   private
 
     def save_members(model)
+      model.lock!
       current_member_ids = model.public_send(member_relation_attribute).map(&:to_s)
 
       case @op
