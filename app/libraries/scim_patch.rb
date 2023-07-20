@@ -26,7 +26,7 @@ class ScimPatch
   end
 
   def save(model)
-    model.transaction do
+    model.with_lock do
       @operations.each do |operation|
         operation.save(model)
       end
