@@ -1,0 +1,16 @@
+version: 2
+updates:
+  # GitHub Actions の SHA 固定を更新する（公開から 7 日たった版だけ。乗っ取り等の悪性版を避けるため）
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+      time: "08:00"
+      timezone: "Asia/Tokyo"
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    ignore:
+      # 社内の非公開リポジトリは Dependabot から取得できない。更新は手作業（SHA とコメントを書き換える）
+      - dependency-name: "ingage/shared-github-workflows*"

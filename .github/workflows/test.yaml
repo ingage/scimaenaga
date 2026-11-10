@@ -9,31 +9,31 @@ jobs:
   rubocop:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2
+      - uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1
         with:
           ruby-version: 3.0.2
-      - uses: reviewdog/action-rubocop@v2
+      - uses: reviewdog/action-rubocop@3ed4a947f3051b184d27eac7ac903d3fe68563ed # v2
 
   brakeman:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2
+      - uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1
         with:
           ruby-version: 3.0.2
-      - uses: reviewdog/action-brakeman@v2
+      - uses: reviewdog/action-brakeman@0fee43fec04facd0f7fb907e2e70ce622a3b7ddb # v2
         with:
           brakeman_flags: --except CheckEOLRails
 
   misspell:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2
+      - uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1
         with:
           ruby-version: 3.0.2
-      - uses: reviewdog/action-misspell@v1
+      - uses: reviewdog/action-misspell@c846b6b0996029d2d39540c8ffebebbd957072db # v1
         with:
           locale: "US"
 
@@ -112,10 +112,10 @@ jobs:
       BUNDLE_GEMFILE: ${{ github.workspace }}/.github/gemfiles/rails-${{ matrix.rails }}.Gemfile
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2
         with:
           fetch-depth: 0
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199 # v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
